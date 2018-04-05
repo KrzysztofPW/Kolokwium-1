@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src = "miasta_dane.js"></script>
+        <script src = "miasta.js"></script>
+        <script>
+function start (){
+    var nazwa1 = document.querySelector("#miastoa").value
+      var miasto1 = Miasta.find(x => x.name == nazwa1)
+      document.querySelector("#a").value = miasto1.gps.map( x => x.toFixed( 3 ) ).join(" , ")
+      var nazwa2 = document.querySelector("#miastob").value
+      var miasto2 = Miasta.find(x => x.name == nazwa2)
+      var nazwa2 = document.querySelector("#miastoc").value
+      var miasto3 = Miasta.find(x => x.name == nazwa2)
+      document.querySelector("#b").value = ( town_dist( miasto1, miasto2 ) ).toFixed(1) + " km"
+      document.querySelector("#c").value = ( town_dist( miasto1, miasto3 ) ).toFixed(1) + " km"
+     tab =[]
+      for (i=0; i<Miasta.length; i++){
+               if(town_dist( miasto1, Miasta[i]).toFixed(1)> ( town_dist( miasto1, miasto2 ) ).toFixed(1) && ( town_dist(miasto1, Miasta[i]).toFixed(1)< ( town_dist( miasto1, miasto3 ) ).toFixed(1)) && town_dist( miasto1, Miasta[i]).toFixed(1)!=0)
+               tab.push(Miasta[i].name)}
+               document.querySelector("#d").value = tab.length
+               document.querySelector("#e").value = tab.join(" ,")
+}
+        </script>
+    </head>
+    <body>
+        <h1>Sprawdzian 1</h1>
+        <p>Miasto A: <input id= "miastoa" value="Warszawa"></p>
+        <p>Miasto B: <input id= "miastob" value="Piaseczno"></p>
+        <p>Miasto C: <input id= "miastoc" value="Radom"></p>
+        <button onclick="start()">Znajdź</button>
+        <p>Współrzędne miasta A: <output id="a"></output></p>
+        <p>Odległość AB: <output id="b"></output></p>
+        <p>Odległość AC: <output id="c"></output></p>
+        <p>Liczba miast oddalonych od A bardziej niż B ale mniejszych od C: <output id="d"></output></p>
+        <p>Miasta: <output id="e"></output></p>
+
+    </body>
+
